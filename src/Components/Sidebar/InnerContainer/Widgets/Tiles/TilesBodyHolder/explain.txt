@@ -1,0 +1,3 @@
+this is the body container for all layers, it's main functionality is to wrap layers' body
+and when the user clicks on it, it should expand or shrink accordingly. 
+also it display the layers' names. 

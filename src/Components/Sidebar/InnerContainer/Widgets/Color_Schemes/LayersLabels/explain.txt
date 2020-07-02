@@ -1,0 +1,1 @@
+the main functionality is to toggle labels on and off. 
