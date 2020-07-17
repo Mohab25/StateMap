@@ -36,8 +36,8 @@ class Index extends Component{
 
     onEach(feature,layer){
         const popupContent = `<Popup><p>Block Name:${feature.properties.PAU_NAME}</p>
-            <p>2008 Census:${parseInt(feature.properties.Census_2008)}</p>
-            <p>2020 Population:${parseInt(feature.properties.ES_2020)}</p>
+            <p>2008 Census:${parseInt(feature.properties.Census)}</p>
+            <p>2020 Population:${parseInt(feature.properties.ES2)}</p>
         </Popup>`
         layer.bindPopup(popupContent)
     }
@@ -54,7 +54,7 @@ class Index extends Component{
 
     styler(feature){
         let colorPallete = this.getColorScheme(); 
-        let pop = parseInt(feature.properties.ES_2020);
+        let pop = parseInt(feature.properties.ES2);
         console.log(pop)
         if(pop<=2000){console.log(colorPallete[0]);return {color:this.state.outline,fillColor:colorPallete[0]}}
         else if(pop>=2000&&pop<=2500){console.log(colorPallete[1]);return {color:this.state.outline,fillColor:colorPallete[1]}}
@@ -75,7 +75,7 @@ class Index extends Component{
         let view  = this.state.view; 
         if(view=='Map'){
         return(
-        <GeoJSON key={this.state.GeojsonKey} data={json_data} style={this.styler} onEachFeature={this.onEach}/>                    
+        <GeoJSON key={this.state.GeojsonKey} data={json_data} style={this.styler} onEachFeature={this.props.onEach}/>                    
         //<GeoJSON key={this.state.GeojsonKey} data={json_data} style={{color:this.state.outline,fillColor:this.state.PolyFillColor}} onEachFeature={this.onEach}/>                
         )}
         else{

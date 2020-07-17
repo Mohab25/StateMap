@@ -5,3 +5,4 @@ export const ToggleDataView = 'ToggleDataView';
 export const ChangeTile = 'ChangeTile'
 export const GEOJsonClicked = 'GEOJSONCLICKED'
 export const SearchItemClicked = 'SEARCHITEMCLICKED'
+export const SearchTableItem = 'SEARCHTABLEITEM'

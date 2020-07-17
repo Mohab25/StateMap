@@ -1,8 +1,19 @@
 import React,{Fragment} from "react";
 import Data from "../../Map/Selected_Areas.geojsonl.json";
+import {useSelector} from 'react-redux'
 
-export default function index(){
-    const tabular = <table style={{width:'100%'}}className='table table-striped'>
+
+export default function Index(){
+    const Features = Data.features;
+    let match=[]; 
+    let name=useSelector(state=>state.SearchReducer.Name);
+    if(name!=''){
+        match=Features.filter(match=>match.properties.PAU_NAME===name)
+    } 
+    else{
+        match = Features; 
+    }
+    const tabular = <table style={{width:'100%'}}className='table table-striped'>    
         <thead className='thead-dark'>
             <tr>
                 <th>Locality Name</th>
@@ -13,17 +24,16 @@ export default function index(){
             </tr>
         </thead>
         <tbody>
-            {Data.features.map(block=>
+            {match.map(block=>   
             <tr>
                 <td style={{fontFamily:'Cairo'}}>{block.properties.AU_NAME}</td>
                 <td style={{fontFamily:'Cairo'}}>{block.properties.PAU_NAME}</td>
-                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{block.properties.Census_2008}</td>
-                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{parseInt(block.properties.ES_2018)}</td>
-                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{parseInt(block.properties.ES_2020)}</td>
+                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{isNaN(parseInt(block.properties.Census))?'No Data':parseInt(block.properties.Census)}</td>
+                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{isNaN(parseInt(block.properties.ES1))?'No Data':parseInt(block.properties.ES1)}</td>
+                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{isNaN(parseInt(block.properties.ES2))?'No Data':parseInt(block.properties.ES2)}</td>
             </tr>)}
         </tbody>
     </table>
-    
     
     return(
         <div className='' style={{marginTop:'100px'}}>
