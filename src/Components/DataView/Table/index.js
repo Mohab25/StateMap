@@ -13,7 +13,7 @@ export default function Index(){
     else{
         match = Features; 
     }
-    const tabular = <table style={{width:'100%'}}className='table table-striped'>    
+    const tabular = <table style={{width:'100%',position:'relative',top:'38px'}}className='table table-striped'>    
         <thead className='thead-dark'>
             <tr>
                 <th>Locality Name</th>

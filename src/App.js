@@ -5,6 +5,9 @@ import store from './store'
 import {Provider} from 'react-redux'
 import './bootstrap.min.css'
 class App extends Component {
+  componentWillMount(){
+    document.title = "Khartoum state vulnerability map"
+  }
   render(){
     return(
       <Provider store={store}>

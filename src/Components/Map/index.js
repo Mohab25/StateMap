@@ -8,7 +8,6 @@ import TogglersContainer from '../Togglers/TogglersContainer/index'
 import GeoJSON_ from './MapComponents/Geojson'
 import {connect} from 'react-redux'
 import Tabular from '../DataView/Table/index'
-import Data from './Selected_Areas.geojsonl.json'
 
 class index extends Component {
     constructor(props){

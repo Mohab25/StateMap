@@ -2,12 +2,14 @@ import styled from 'styled-components'
 
 export const SearchContainer=styled.div`
     width:200px; 
-    height:500px;
-    margin-right:150px; 
     background:transparent; 
     display:flex;
     flex-direction:column; 
-    overflow:auto;
+    @media(min-width:200px){
+        position:relative;
+        top:88px; 
+        left:42px;
+    }
 
 `
 
@@ -21,11 +23,17 @@ export const LeafSearchBar = styled.input`
     ::placeholder{
         color:white;
     } 
+    @media(min-width:200px){
+        width:100px; 
+    }
 `
 
 export const Matchcard = styled.div`
     width:100%;
     height:50px;  
+    position:relative;
+    right:78px; 
+    top:8px; 
     overflow:hidden;
     font-size:12px; 
     cursor:pointer; 
