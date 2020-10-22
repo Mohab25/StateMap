@@ -41,13 +41,13 @@ else {
     return(
         <Fragment>
             <ColorPalette onClick={colorPalette}>
-            <ColorPickedContainer>
-                {colorSet1.map((color,index)=><ColorPicked key={index} color={color} onClick={()=>dispatch(OutlinecolorChanger(color))}/>)}
-            </ColorPickedContainer>
-            <ColorPickedContainer>
-                {colorSet2.map((color,index)=><ColorPicked key={index} color={color} onClick={()=>dispatch(OutlinecolorChanger(color))}/>)}
-            </ColorPickedContainer>
-            <ColorPickedContainer><ColorPicked color={'grey'} onClick={()=>dispatch(OutlinecolorChanger('none'))}>None</ColorPicked></ColorPickedContainer>
+                <ColorPickedContainer>
+                    {colorSet1.map((color,index)=><ColorPicked key={index} color={color} onClick={()=>dispatch(OutlinecolorChanger(color))}/>)}
+                </ColorPickedContainer>
+                <ColorPickedContainer>
+                    {colorSet2.map((color,index)=><ColorPicked key={index} color={color} onClick={()=>dispatch(OutlinecolorChanger(color))}/>)}
+                </ColorPickedContainer>
+                <ColorPickedContainer><ColorPicked color={'grey'} onClick={()=>dispatch(OutlinecolorChanger('none'))}>None</ColorPicked></ColorPickedContainer>
             </ColorPalette>
         </Fragment>
     )

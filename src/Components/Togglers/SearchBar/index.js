@@ -17,6 +17,7 @@ export default function Index() {
     }
     const handleChange=(e)=>{
         let BlockList = Data.features; 
+        // the actual filtering 
         let matches = BlockList.filter(block=>{
             let regex = new RegExp(`^${e.target.value}`,'gi')
             return block.properties.PAU_NAME.match(regex)
@@ -46,7 +47,7 @@ export default function Index() {
 
         <Fragment>
             <SearchContainer>
-            <LeafSearchBar ref={textInput} onChange={handleChange} placeholder='Search...' placeholderTextColor='green'></LeafSearchBar>
+            <LeafSearchBar ref={textInput} onChange={handleChange} placeholder='Search(ِArabic)...' placeholderTextColor='green'></LeafSearchBar>
             {card}
             </SearchContainer>
         </Fragment>

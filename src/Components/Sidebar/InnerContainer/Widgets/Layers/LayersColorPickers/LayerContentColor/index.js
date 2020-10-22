@@ -40,9 +40,9 @@ export default function Index() {
                 {/*<ColorPickedContainer>
                     {colorSet1.map((color,index)=><ColorPicked key={index} color={color} onClick={()=>dispatch(colorChanger(color))}/>)}
                 </ColorPickedContainer>*/}
-                <ColorPickedContainer>
-                    {colorSet2.map((color,index)=><ColorPicked key={index} color={color} onClick={()=>dispatch(colorChanger(color))}/>)}
-                </ColorPickedContainer>
+                    <ColorPickedContainer>
+                        {colorSet2.map((color,index)=><ColorPicked key={index} color={color} onClick={()=>dispatch(colorChanger(color))}/>)}
+                    </ColorPickedContainer>
                 </ColorPalette>
             </Fragment>
         )

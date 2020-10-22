@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const TilesBodyHolder = styled.div`
     width:90%; 
-    height:${props=>props.height}px; 
+    height:${props=>props.height}px; /* this is because of toggling the height*/
     background-color:#2f2f2f; 
     margin-left:-2%;
     display:flex; 
@@ -10,7 +10,7 @@ export const TilesBodyHolder = styled.div`
     justify-content:flex-start ; 
     align-items:flex-start; 
     align-content:space-evenly; 
-    overflow:${props=>props.overFlow};
+    overflow:${props=>props.overFlow}; /* also this is for toggling*/
     transition:1s; 
 `
 
@@ -19,7 +19,6 @@ export const TilesNameHolder = styled.div`
     background-color:#1f1f1f; 
     padding:10px; 
     display:flex;  
-    flex-direction:row; 
     justify-content:space-between; 
     cursor:pointer; 
 `

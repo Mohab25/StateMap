@@ -1,17 +1,15 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 export const MapContainer = styled.div`
-    width:100%; 
+    width:100%;     /* the map container  holds both the map and sidebar */ 
     height:100vh;
-    padding:0px;   
-    background-color:green;   
+    padding:0px;      
     overflow:hidden;
+    display:flex; 
 `
 export const LeafMapContainer = styled.div`
-    width:75%; 
+    flex-basis:75%;      /* this is the actual leaflet map*/ 
     height:100%; 
-    float:left; 
-    background-color:yellow; 
     padding:0px; 
 
     @media(max-width:1000px){

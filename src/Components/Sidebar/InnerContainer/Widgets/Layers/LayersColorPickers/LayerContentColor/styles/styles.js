@@ -1,19 +1,22 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 export const SidebarInnerColorPickerContainer=styled.div`
     width:100%; 
     height:25%; 
- 
+    display:flex; 
+
 `
 
 export const SidebarInnerColorPickerText=styled.p`
     color:white;
     align-self:flex-start; 
     margin-left:20px; 
+    position:relative; 
+    top:10%; 
 `
 
 export const SidebarInnerColorPickerDiv=styled.div`
-    width:50px; 
-    height:30px; 
+    width:37px; 
+    height:37px; 
     background-color:${props=>props.color}; 
     align-self:flex-start; 
     margin-left:20px; 
