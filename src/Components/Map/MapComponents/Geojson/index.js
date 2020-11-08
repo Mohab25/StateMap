@@ -23,8 +23,8 @@ class Index extends Component{
 
     async componentDidMount(){
         // fetching data from django. 
-        await fetch('http://127.0.0.1:8000/state/paus/').then(res=>res.json()).then(
-            (data)=>{this.setState({json_ob:data});console.log('Blocks ',data)})
+        await fetch('https://127.0.0.1:8000/state/paus/').then(res=>res.json()).then(
+            (data)=>{this.setState({json_ob:data})})
             this.state.json_ob.name="State Blocks"
         }
 
