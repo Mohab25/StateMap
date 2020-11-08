@@ -14,11 +14,9 @@ export default function Index() {
 
     const toggelSidebar=()=>{
             if (SidebarPosition === '-500'){
-                console.log("Sidebar Position:",SidebarPosition)
                 SetSidebarPosition('0')
             }
             else if(SidebarPosition==='0'){
-                console.log("Sidebar Position:",SidebarPosition)
                 SetSidebarPosition('-500')
             }
 

@@ -92,7 +92,6 @@ class index extends Component {
         // this is a props coming from redux 
         this.props.changeCoords(e.latlng)
         this.setState({clicklatlng:e.latlng})
-        console.log(this.props.getMapCoords.coords)
         let key = this.state.shortest_line_json_key;
         key++; 
         // making a post request 
@@ -103,7 +102,7 @@ class index extends Component {
                 'Content-Type':'application/json'
             },
             body:JSON.stringify(this.props.getMapCoords.coords)
-        }).then(res=>res.json()).then(data=>{this.setState({shortest_line:data,shortest_line_json_key:key});console.log('Server response:',data)})
+        }).then(res=>res.json()).then(data=>{this.setState({shortest_line:data,shortest_line_json_key:key})})
         
         // on subsquent clicks, the original state shortest line should change 
     
@@ -124,7 +123,6 @@ class index extends Component {
             // filling up shortest line with geometry 
             else if(Object.keys(this.state.shortest_line).length!=0){
                 shortest_line= <GeoJSON data={this.state.shortest_line} key={this.state.shortest_line_json_key}/>
-                console.log('is this clicked on second call?',this.state.shortest_line)
             }   
         return (
             <div>
