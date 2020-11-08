@@ -1,12 +1,9 @@
 import React,{Component,Fragment} from 'react'
-// this is the actual data, it should be changed to read from postgres 
-import json_data from '../../Selected_Areas.geojsonl.json'
 // import Geojson object and popup from leaflet component, also think about using a modal
 import {GeoJSON,Popup} from 'react-leaflet'
 import {connect} from 'react-redux'
 // this is an action to change geojson colors
 import {colorChanger} from '../../../../Actions/ActionsCreators/LayerColorChangeForClassComponent'
-import  rootReducer  from "../../../../Reducers";
 
 class Index extends Component{
     constructor(props){
@@ -15,7 +12,8 @@ class Index extends Component{
             PolyFillColor:'grey', // by default the color is grey. 
             GeojsonKey:1,//?
             outline:'none', // this is the outline of the geojson object, changes according to stateprops from redux 
-            view:'Map'    // the view changes dynamically. 
+            view:'Map',    // the view changes dynamically. 
+            json_ob:{},        // holds data coming from server 
         };
 
         this.onEach= this.onEach.bind(this);
@@ -23,9 +21,13 @@ class Index extends Component{
         this.getColorScheme = this.getColorScheme.bind(this)
     }
 
-    componentDidMount(){
-        console.log('Geojson, Geojson_key:',this.state.GeojsonKey)
-    }
+    async componentDidMount(){
+        // fetching data from django. 
+        await fetch('http://127.0.0.1:8000/state/paus/').then(res=>res.json()).then(
+            (data)=>{this.setState({json_ob:data});console.log('Blocks ',data)})
+            this.state.json_ob.name="State Blocks"
+        }
+
 
     componentDidUpdate(prevProps){
         /**
@@ -40,10 +42,12 @@ class Index extends Component{
     }
 
     onEach(feature,layer){
-        const popupContent = `<Popup><p>Block Name:${feature.properties.PAU_NAME}</p>
-            <p>2008 Census:${parseInt(feature.properties.Census)}</p>
-            <p>2020 Population:${parseInt(feature.properties.ES2)}</p>
-        </Popup>`
+        const popupContent =
+            `<Popup><p>Block Name:${feature.properties.pau_name}</p>
+            <p>2008 Census:${parseInt(feature.properties.census)}</p>
+            <p>2020 Population:${parseInt(feature.properties.es2)}</p>
+            </Popup>`
+
         layer.bindPopup(popupContent)
     }
 
@@ -58,9 +62,8 @@ class Index extends Component{
     }
 
     styler(feature){
-
         let colorPallete = this.getColorScheme(); // this is a list of colors 
-        let pop = parseInt(feature.properties.ES2); // population estemation for 2020
+        let pop = parseInt(feature.properties.es2); // population estemation for 2020
         
         // according to population, a certain color will be returned 
         if(pop<=2000){return {color:this.state.outline,fillColor:colorPallete[0]}}
@@ -81,10 +84,18 @@ class Index extends Component{
     render(){
         let view  = this.state.view; 
         if(view=='Map'){
+        if(Object.keys(this.state.json_ob).length!=0){
         return(
-        <GeoJSON key={this.state.GeojsonKey} data={json_data} style={this.styler} onEachFeature={this.props.onEach}/>                    
+        <GeoJSON key={this.state.GeojsonKey} data={this.state.json_ob} style={this.styler} onEachFeature={this.onEach}/>                    
         //<GeoJSON key={this.state.GeojsonKey} data={json_data} style={{color:this.state.outline,fillColor:this.state.PolyFillColor}} onEachFeature={this.onEach}/>                
         )}
+        else{
+            return(
+            <Fragment>
+
+            </Fragment>)
+        }
+    }
         else{
             return(
                 <Fragment></Fragment>

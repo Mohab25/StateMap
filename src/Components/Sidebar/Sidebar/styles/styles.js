@@ -15,9 +15,10 @@ export const Sidebar = styled.div`
 
     @media (max-width:1000px){
         overflow:hidden; 
-        width:50%; 
+        width:30%; 
         position:absolute; 
         left:${props=>props.Sideposition}px;  /*this is for toggling*/ 
+        z-index:1001; /* the z-index of zoom signs is 1000 */
     }
 
 `
@@ -40,7 +41,6 @@ export const SidebarSubtitle = styled.p`
 export const SidebarSettings = styled.div`
     margin-top:5px; 
     width:80%;
-    background-color:teal; 
     color:white; 
     padding:10px;
     text-align:center; 

@@ -13,6 +13,6 @@ export const LeafMapContainer = styled.div`
     padding:0px; 
 
     @media(max-width:1000px){
-        width:100%; 
+        flex-basis:100%; 
     }
 `

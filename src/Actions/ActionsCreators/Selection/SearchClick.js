@@ -1,5 +1,4 @@
 import {SearchItemClicked} from '../../types';
-import Data from '../../../Components/Map/Selected_Areas.geojsonl.json'
 
 export const searchItem=(matchedItem)=>{
     console.log('Action:',matchedItem)

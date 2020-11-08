@@ -20,8 +20,8 @@ export default function Index() {
     }
     
     const imgs = [[img1,'Dark Theme'],[img2,'Light Theme'],[img3,'Topo Theme']]
-    const returner = imgs.map(content=>
-        <Fragment>
+    const returner = imgs.map((content,index)=>
+        <Fragment key={index}>
         <SidebarTilesPickerText>{content[1]}</SidebarTilesPickerText>
         <SidebarTilesPickerDiv onClick={()=>ChangeTile(content[1])} background={content[0]}></SidebarTilesPickerDiv>
         </Fragment>
