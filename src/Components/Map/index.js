@@ -95,7 +95,7 @@ class index extends Component {
         let key = this.state.shortest_line_json_key;
         key++; 
         // making a post request 
-        fetch('http://localhost:8000/state/closest_healthcare/',{
+        fetch('http://197.252.18.152:8000/state/closest_healthcare/',{
             method:'POST',
             mode:'cors',
             headers:{

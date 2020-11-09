@@ -11,7 +11,7 @@ export default function Index(){
     let [match,setMatch]=useState([{ "type": "Feature", "properties": { "OBJECTID_1": 0, "OBJECTID": 0, "PAU_NAME": "", "VILLAGE": "", "PAU_CODE": "", "VILL_CODE": "", "ST_NAME": "", "ST_CODE":0, "LOC_NAME": "", "LOC_CODE": "", "AU_NAME": "", "AU_CODE": "", "Elec":0, "Phone":0, "WC":0, "OID_Join": "", "State": "", "County": "", "AU": "", "PAU": "", "M_0_4":0, "F_0_4": 57, "M_5_14": 81, "F_5_14": 96, "M_15_24": 45, "F_15_24": 76, "M_25_44": 37, "F_25_44": 69, "M_45_Plus": 26, "F_45_Plus": 39, "TOT_POP": 577, "Tot_HHS": 119, "Shape_Leng": 3946.73463636, "Shape_Le_1": 3946.73463636, "Shape_Area": 488029.18487400003, "Fam": null, "Census": null, "ES1": null, "ES2": null }, "geometry": { "type": "MultiPolygon", "coordinates": []} }])
 
     useEffect(()=>{ // there is a design probelm here , instead of fetch again for the same data, use redux 
-        let fun= async()=>{await fetch('http://localhost:8000/state/paus/').then(res=>{return res.json()}).then(
+        let fun= async()=>{await fetch('http://197.252.18.152:8000/state/paus/').then(res=>{return res.json()}).then(
             (data)=>{setData({data_list:data})})
     } 
         fun()  // this way of async fetching iniside useefect is described by the docs 
