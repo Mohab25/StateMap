@@ -10,7 +10,7 @@ export const TilesBodyHolder = styled.div`
     justify-content:flex-start ; 
     align-items:flex-start; 
     align-content:space-evenly; 
-    overflow:${props=>props.overFlow}; /* also this is for toggling*/
+    overflow:hidden; 
     transition:1s; 
 `
 

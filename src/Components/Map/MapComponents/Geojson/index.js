@@ -4,6 +4,9 @@ import {GeoJSON,Popup} from 'react-leaflet'
 import {connect} from 'react-redux'
 // this is an action to change geojson colors
 import {colorChanger} from '../../../../Actions/ActionsCreators/LayerColorChangeForClassComponent'
+// import data 
+import data from '../../Selected_Areas.geojsonl.json'
+
 
 class Index extends Component{
     constructor(props){
@@ -21,12 +24,14 @@ class Index extends Component{
         this.getColorScheme = this.getColorScheme.bind(this)
     }
 
-    async componentDidMount(){
-        // fetching data from django. 
-        await fetch('http://197.252.18.152:8000/state/paus/').then(res=>res.json()).then(
-            (data)=>{this.setState({json_ob:data})})
-            this.state.json_ob.name="State Blocks"
-        }
+    componentDidMount(){
+        // // fetching data from django. 
+        // await fetch('http://197.252.18.152:8000/state/paus/').then(res=>res.json()).then(
+        //     (d)=>{this.setState({json_ob:d})})
+        //     this.state.json_ob.name="State Blocks"
+        // 
+        this.setState({json_ob:data})
+    }
 
 
     componentDidUpdate(prevProps){
@@ -43,9 +48,9 @@ class Index extends Component{
 
     onEach(feature,layer){
         const popupContent =
-            `<Popup><p>Block Name:${feature.properties.pau_name}</p>
-            <p>2008 Census:${parseInt(feature.properties.census)}</p>
-            <p>2020 Population:${parseInt(feature.properties.es2)}</p>
+            `<Popup><p>Block Name:${feature.properties.PAU_NAME}</p>
+            <p>2008 Census:${parseInt(feature.properties.Census)}</p>
+            <p>2020 Population:${parseInt(feature.properties.ES2)}</p>
             </Popup>`
 
         layer.bindPopup(popupContent)
@@ -63,7 +68,7 @@ class Index extends Component{
 
     styler(feature){
         let colorPallete = this.getColorScheme(); // this is a list of colors 
-        let pop = parseInt(feature.properties.es2); // population estemation for 2020
+        let pop = parseInt(feature.properties.ES2); // population estemation for 2020
         
         // according to population, a certain color will be returned 
         if(pop<=2000){return {color:this.state.outline,fillColor:colorPallete[0]}}
@@ -88,19 +93,9 @@ class Index extends Component{
         return(
         <GeoJSON key={this.state.GeojsonKey} data={this.state.json_ob} style={this.styler} onEachFeature={this.onEach}/>                    
         //<GeoJSON key={this.state.GeojsonKey} data={json_data} style={{color:this.state.outline,fillColor:this.state.PolyFillColor}} onEachFeature={this.onEach}/>                
-        )}
-        else{
-            return(
-            <Fragment>
-
-            </Fragment>)
-        }
+        )} else{return(<></>)}
     }
-        else{
-            return(
-                <Fragment></Fragment>
-            )
-        }
+        else{return(<></>)}
     }
 } 
 

@@ -2,11 +2,12 @@ import React,{Fragment} from 'react'
 import {SidebarTilesPickerContainer,SidebarTilesPickerText,SidebarTilesPickerDiv} 
 from './styles/styles'
 import {useDispatch} from 'react-redux'
-import { changeTile } from "../../../../../../../Actions/ActionsCreators/TileChange/ChangeTile";
-import { colorChanger } from "../../../../../../../Actions/ActionsCreators/LayerColorChange";
 import img1 from '../images/Dark.jpg'
 import img2 from '../images/Light.jpg'
 import img3 from '../images/Topo.jpg'
+
+import { changeTile } from "../../../../../../../Actions/ActionsCreators/TileChange/ChangeTile";
+import { colorChanger } from "../../../../../../../Actions/ActionsCreators/LayerColorChange";
 
 
 export default function Index() {
@@ -20,17 +21,17 @@ export default function Index() {
     }
     
     const imgs = [[img1,'Dark Theme'],[img2,'Light Theme'],[img3,'Topo Theme']]
-    const returner = imgs.map((content,index)=>
+    const TileContent = imgs.map((content,index)=>
         <Fragment key={index}>
         <SidebarTilesPickerText>{content[1]}</SidebarTilesPickerText>
         <SidebarTilesPickerDiv onClick={()=>ChangeTile(content[1])} background={content[0]}></SidebarTilesPickerDiv>
         </Fragment>
         )
     return (
-        <Fragment>
+        <>
             <SidebarTilesPickerContainer>
-                {returner}
+                {TileContent}
             </SidebarTilesPickerContainer>
-        </Fragment>
+        </>
     )
 }

@@ -1,4 +1,4 @@
-import React,{Fragment,useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import {SearchContainer,LeafSearchBar,Matchcard} from './styles/styles'
 import Data from '../../../Components/Map/Selected_Areas.geojsonl.json'
 import {searchItem} from "../../../Actions/ActionsCreators/Selection/SearchClick";
@@ -10,7 +10,7 @@ export default function Index() {
     let [cardmatches,setMatches] = useState([]); 
     let textInput = useRef(null);
 
-    const changer=()=>{
+    const ClearSeachBar=()=>{
         textInput.current.value='';
         let matches =[]; 
         showSearchResult(matches)
@@ -34,8 +34,9 @@ export default function Index() {
     let view = useSelector(state=>state.ToggleView.View)
     let dispatch = useDispatch()
     let card = cardmatches.map(match=>
-    <div onClick={()=>{if(view==='Map'){dispatch(searchItem(match));changer()}
-                           else dispatch(searchTableItem(match.properties.PAU_NAME))
+    <div onClick={()=>{
+        if(view==='Map'){dispatch(searchItem(match));ClearSeachBar()}
+        else dispatch(searchTableItem(match.properties.PAU_NAME))
     }
     }>
         <Matchcard className='card card-body mb-1'>
@@ -45,11 +46,11 @@ export default function Index() {
         )
     return (
 
-        <Fragment>
+        <>
             <SearchContainer>
             <LeafSearchBar ref={textInput} onChange={handleChange} placeholder='Search(ِArabic)...' placeholderTextColor='green'></LeafSearchBar>
             {card}
             </SearchContainer>
-        </Fragment>
+        </>
     )
 }

@@ -1,5 +1,5 @@
-import React,{useState,useEffect,Fragment} from 'react'
-import {Sidebar,SidebarTitle,SidebarSubtitle,SidebarInnerContainer,SidebarSettings} from './styles/styles'
+import React,{useState,useEffect} from 'react'
+import {Sidebar,SidebarTitle,SectionTitle,SidebarOperation} from './styles/styles'
 import InnerDiv from '../InnerContainer/index'
 import SidebarIcon from '../SideIcon/index'
 import { useSelector,useDispatch } from 'react-redux';
@@ -12,7 +12,7 @@ import {removeJson} from '../../../Actions/ActionsCreators/ColsestFacilityComput
 export default function Index() {
     let [SidebarPosition,SetSidebarPosition] = useState('-500');
 
-    const toggelSidebar=()=>{
+    const toggleSidebar=()=>{
             if (SidebarPosition === '-500'){
                 SetSidebarPosition('0')
             }
@@ -50,14 +50,15 @@ export default function Index() {
         },[]); 
 
     return (
-        <Fragment>
+        <>
             <Sidebar Sideposition={SidebarPosition}>
             <SidebarTitle>Mohab Jam</SidebarTitle>
-            <SidebarSubtitle>Layer Settings</SidebarSubtitle>
+            <SectionTitle>Layer Settings</SectionTitle>
             <InnerDiv></InnerDiv>
-            <SidebarSettings className='btn btn-warning' onClick={compute}>Closet Healthcare </SidebarSettings>
+            <SectionTitle>Computations</SectionTitle>
+            <SidebarOperation className='btn btn-warning' onClick={compute}>Closet Healthcare </SidebarOperation>
             </Sidebar>
-            <SidebarIcon click={toggelSidebar}/>
-        </Fragment>
+            <SidebarIcon click={toggleSidebar}/>
+        </>
     )
 }

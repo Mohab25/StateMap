@@ -1,1 +1,0 @@
-this holds the data array represents the names,numbers and types of layers to inject in layers container. 

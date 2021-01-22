@@ -10,7 +10,7 @@ export const LayerBodyHolder = styled.div`
     justify-content:space-between; 
     align-items:flex-start; 
     align-content:space-evenly; 
-    overflow:${props=>props.overFlow};
+    overflow:hidden;
     transition:1s; 
 `
 

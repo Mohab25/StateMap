@@ -1,9 +1,8 @@
-import React,{Fragment,useState,useEffect} from 'react'
+import React,{Fragment,useState} from 'react'
 import {SidebarInnerColorPickerContainer,SidebarInnerColorPickerText,
     SidebarInnerColorPickerDiv,ColorPalette,ColorPickedContainer,ColorPicked} 
 from './styles/styles'
 import {useSelector,useDispatch} from 'react-redux' 
-import {FillColorChange} from '../../../../../../../Actions/types.js'
 import {colorChanger} from '../../../../../../../Actions/ActionsCreators/LayerColorChange'
 
 
@@ -14,9 +13,9 @@ export default function Index() {
     const fillColor = useSelector(state=>state.LayerColors.fillColor); 
     const dispatch = useDispatch();
 
-    let colorPalette=()=>{
+    let changeRender=()=>{
         if(Renderer===''){
-        setRenderer('Color Palete');
+        setRenderer('Color Palette');
         }
         else{
             setRenderer('')
@@ -28,7 +27,7 @@ export default function Index() {
             <Fragment>
                 <SidebarInnerColorPickerContainer>
                     <SidebarInnerColorPickerText>color</SidebarInnerColorPickerText>
-                    <SidebarInnerColorPickerDiv color={fillColor} onClick={colorPalette}></SidebarInnerColorPickerDiv>
+                    <SidebarInnerColorPickerDiv color={fillColor} onClick={changeRender}></SidebarInnerColorPickerDiv>
                 </SidebarInnerColorPickerContainer>
             </Fragment>
         )
@@ -36,7 +35,7 @@ export default function Index() {
     else {
         return(
             <Fragment>
-                <ColorPalette onClick={colorPalette}>
+                <ColorPalette onClick={changeRender}>
                 {/*<ColorPickedContainer>
                     {colorSet1.map((color,index)=><ColorPicked key={index} color={color} onClick={()=>dispatch(colorChanger(color))}/>)}
                 </ColorPickedContainer>*/}

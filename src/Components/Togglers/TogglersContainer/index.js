@@ -1,18 +1,18 @@
-import React,{Fragment} from 'react'
+import React from 'react'
 import {LeafTogglersContainer,MapDataHolder} from './styles/styles'
-import DataToggler from '../DataToggler/index'
-import MapToggler from '../MapToggler/index'
-import SearBar from '../SearchBar/index' 
+import DataToggler from '../DataToggler'
+import MapToggler from '../MapToggler'
+import SearchBar from '../SearchBar' 
 export default function index() {
     return (
-        <Fragment>
+        <>
             <LeafTogglersContainer>
                 <MapDataHolder>
                 <MapToggler/>
                 <DataToggler/>
                 </MapDataHolder>
-                <SearBar/>
+                <SearchBar/>
             </LeafTogglersContainer>
-        </Fragment>
+        </>
     )
 }

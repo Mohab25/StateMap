@@ -29,7 +29,7 @@ export const SidebarTitle = styled.h6`
 
 `
 
-export const SidebarSubtitle = styled.p`
+export const SectionTitle = styled.p`
     width:100%;     
     color:white; 
     padding-left:20px;
@@ -38,7 +38,7 @@ export const SidebarSubtitle = styled.p`
     border-bottom:1px solid white; 
 `
 
-export const SidebarSettings = styled.div`
+export const SidebarOperation = styled.div`
     margin-top:5px; 
     width:80%;
     color:white; 

@@ -1,4 +1,4 @@
-import React,{Fragment} from 'react'
+import React from 'react'
 import {LeafDataToggler} from './styles/styles'
 import {useSelector,useDispatch} from 'react-redux' 
 import {toggleDataView} from '../../../Actions/ActionsCreators/ToggleActions/ToggleDataView'
@@ -15,8 +15,8 @@ export default function Index() {
     }
 
     return (
-        <Fragment>
+        <>
             <LeafDataToggler onClick={()=>switchData(view)}>Data</LeafDataToggler>
-        </Fragment>
+        </>
     )
 }

@@ -4,7 +4,6 @@ import {SidebarInnerColorOutlinePickerContainer,SidebarInnerOulineColorPickerTex
 SidebarInnerOutlineColorPickerDiv} from './styles/styles'
 import {ColorPalette,ColorPickedContainer,ColorPicked} from '../LayerContentColor/styles/styles'
 import {OutlinecolorChanger} from '../../../../../../../Actions/ActionsCreators/LayerOutlineColorChange'
-import { OutlineColorChange } from '../../../../../../../Actions/types'
 
 
 export default function Index() {
@@ -15,9 +14,9 @@ export default function Index() {
     const fillColor =  useSelector(state=>state.LayerColors.fillColor);
     const dispatch = useDispatch();
 
-    let colorPalette=()=>{
+    let toggleColorPalette=()=>{
         if(Renderer===''){
-        setRenderer('Color Palete');
+        setRenderer('Color Palette');
         }
         else{
             setRenderer('')
@@ -31,7 +30,7 @@ export default function Index() {
         <Fragment>
         <SidebarInnerColorOutlinePickerContainer>    
             <SidebarInnerOulineColorPickerText>Outline color</SidebarInnerOulineColorPickerText>
-            <SidebarInnerOutlineColorPickerDiv onClick={colorPalette} outline={OutlineColor} color={fillColor}></SidebarInnerOutlineColorPickerDiv>
+            <SidebarInnerOutlineColorPickerDiv onClick={toggleColorPalette} outline={OutlineColor} color={fillColor}></SidebarInnerOutlineColorPickerDiv>
         </SidebarInnerColorOutlinePickerContainer>
         </Fragment>
     )
@@ -40,7 +39,7 @@ export default function Index() {
 else {
     return(
         <Fragment>
-            <ColorPalette onClick={colorPalette}>
+            <ColorPalette onClick={toggleColorPalette}>
                 <ColorPickedContainer>
                     {colorSet1.map((color,index)=><ColorPicked key={index} color={color} onClick={()=>dispatch(OutlinecolorChanger(color))}/>)}
                 </ColorPickedContainer>

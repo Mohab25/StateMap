@@ -23,55 +23,26 @@ class index extends Component {
     constructor(props){
             super(props);
             this.state={
-                // set the inital location and zoom level 
+                // set the initial location and zoom level 
                 lat:15.570498544455713,
                 long:32.532881032138349,
                 zoom:15,
                 view:'Map',
                 // set the tile,it comes from redux(mapStateToProps), and changes as the user clicks
                 tile:this.props.tile,
-                // set the fly effect, when the user search for a certain place.  
-                Flying_match:{}, 
-                // send click latlng to backend for network analysis 
-                clicklatlng:{},
                 // getting a response from the server 
                 shortest_line:{},
                 shortest_line_json_key:2, 
             }
-            this.GeojsononEach = this.GeojsononEach.bind(this);
-            this.matched = this.matched.bind(this);
+            this.mapInstance = React.createRef()
             this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount(){
-        this.map = this.mapInstance.leafletElement; 
+        this.map = this.mapInstance.current.leafletElement; 
     }
- 
-    matched(MatchedItem=''){
-        this.setState({Flying_match:MatchedItem},()=>{this.GeojsononEach()})
-        
-    }
-    GeojsononEach(feature,layer){
-        let matched = this.state.Flying_match
-        let popupContent='';
 
-        // set the popup, this may change to be a modal instead of using leaflet. 
-          
-        if(Object.keys(matched).length==0){ //check the Flying_match object length to prevent error when reacts first loads, when the user clicks to fly to searched place.
-        // ineed to change this to just bind the popup on user clicks, also note that 
-        // a problem i wanted to solve is when the map flys, a popup opens dynamically 
 
-        popupContent = `<Popup><p>Block Name:${feature.properties.PAU_NAME}</p>
-        <p>2008 Census:${parseInt(feature.properties.Census)}</p>
-        <p>2020 Population:${parseInt(feature.properties.ES2)}</p>
-        </Popup>`
-        layer.bindPopup(popupContent)
-        }
-        // here you can handle events on the json object. 
-        layer.on({
-            click:this.handleClick
-        })
-    }
     componentDidUpdate(prevProps){
         if(prevProps!=this.props){
            //console.log('Map object:previous props',prevProps)
@@ -83,7 +54,6 @@ class index extends Component {
             let [Fly1,Fly2] = this.props.MatchedItem.geometry.coordinates[0][0][0];
             // check if the view is a map view or data view. 
             if(this.state.view=='Map'){this.map.flyTo([Fly2,Fly1],15);
-            this.matched(this.props.MatchedItem)  
             }
         }
     }
@@ -91,11 +61,10 @@ class index extends Component {
     handleClick(e){
         // this is a props coming from redux 
         this.props.changeCoords(e.latlng)
-        this.setState({clicklatlng:e.latlng})
         let key = this.state.shortest_line_json_key;
         key++; 
         // making a post request 
-        fetch('http://197.252.18.152:8000/state/closest_healthcare/',{
+        fetch('http://localhost:8000/state/closest_healthcare/',{
             method:'POST',
             mode:'cors',
             headers:{
@@ -104,8 +73,7 @@ class index extends Component {
             body:JSON.stringify(this.props.getMapCoords.coords)
         }).then(res=>res.json()).then(data=>{this.setState({shortest_line:data,shortest_line_json_key:key})})
         
-        // on subsquent clicks, the original state shortest line should change 
-    
+        // on subsequent clicks, the original state shortest line should change 
     
     }
     render() {
@@ -114,11 +82,11 @@ class index extends Component {
         let view = this.state.view;  // map or data view 
         if(view=='Map'){
             // setting up the blocks and shortest line 
-            let Blocks=<Fragment></Fragment>
-            let shortest_line=<Fragment></Fragment>
+            let Blocks=<></>
+            let shortest_line=<></>
             // filling up Blocks with geometry
             if(this.props.jsonSwitcher!='off'){
-                Blocks= <GeoJSON_ onEach={this.GeojsononEach}/> 
+                Blocks= <GeoJSON_/> 
             }
             // filling up shortest line with geometry 
             else if(Object.keys(this.state.shortest_line).length!=0){
@@ -129,7 +97,7 @@ class index extends Component {
                 <MapContainer> {/*Map container holds both map and sidebar*/}
                     <Sidebar></Sidebar>
                     <LeafMapContainer> {/* this is the actual map */}
-                        <Map center={position} zoom={this.state.zoom} style={{width:'100%',height:'100%'}} ref={e => { this.mapInstance = e }} onclick={this.handleClick}>
+                        <Map center={position} zoom={this.state.zoom} style={{width:'100%',height:'100%'}} ref={this.mapInstance} onclick={this.handleClick}>
                             <TileLayer url={this.state.tile}/>
                             {Blocks}
                             {shortest_line}

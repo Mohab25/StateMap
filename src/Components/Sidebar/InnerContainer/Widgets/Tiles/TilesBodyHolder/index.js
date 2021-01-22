@@ -6,12 +6,10 @@ import TilePicker from '../TilesPickers/TilesPicker'
 
 export default function Index() {
     let [bodyHeight,setHeight]=useState('50'); 
-    let [overflow,setOverflow] = useState('hidden');
     let [Icon,setIcon] = useState('icon-plus')
-    let toggleHeightAndOverflow=()=>{
+    let toggleHeightAndIcon=()=>{
         if(bodyHeight==='380'){
             setHeight('50');
-            setOverflow('hidden');
             setIcon('icon-plus')
         }
         else if(bodyHeight==='50'){
@@ -23,15 +21,15 @@ export default function Index() {
     
     
     return (
-        <Fragment>
-            <TilesBodyHolder height={bodyHeight} overFlow={overflow}>
-                <TilesNameHolder onClick={toggleHeightAndOverflow}>
+        <>
+            <TilesBodyHolder height={bodyHeight}>
+                <TilesNameHolder onClick={toggleHeightAndIcon}>
                     <TilesName>Tiles</TilesName>
                     <TilesToggleIcon><i className={Icon}></i></TilesToggleIcon>
                 </TilesNameHolder>
                 <TilePicker/>
             </TilesBodyHolder>
             
-        </Fragment>
+        </>
     )
 }

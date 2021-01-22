@@ -1,4 +1,4 @@
-import React,{Fragment,useState} from 'react'
+import React,{useState} from 'react'
 import ContentColorPicker from '../LayersColorPickers/LayerContentColor/index'
 import OutlineColorPicker from '../LayersColorPickers/LayersOutlineColor/index'
 import Label from '../LayersLabels/index'
@@ -6,7 +6,6 @@ import {LayerBodyHolder,LayerNameHolder,LayerName,LayerToggleIcon} from './style
 
 export default function Index() {
     let [bodyHeight,setHeight]=useState('50'); 
-    let [overflow,setOverflow] = useState('hidden');
     let [Icon,setIcon] = useState('icon-plus')
     let toggleHeightAndOverflow=()=>{
         /**
@@ -15,7 +14,6 @@ export default function Index() {
         if(bodyHeight==='380'){
             // if the height is 380, minimize it and toggle the icon className. 
             setHeight('50');
-            setOverflow('hidden');
             setIcon('icon-plus')
         }
         else if(bodyHeight==='50'){
@@ -28,8 +26,8 @@ export default function Index() {
     
     
     return (
-        <Fragment>
-            <LayerBodyHolder height={bodyHeight} overFlow={overflow}>
+        <>
+            <LayerBodyHolder height={bodyHeight}>
                 <LayerNameHolder onClick={toggleHeightAndOverflow}>
                     <LayerName>Color Scheme</LayerName>
                     <LayerToggleIcon className={Icon}></LayerToggleIcon>
@@ -38,6 +36,6 @@ export default function Index() {
                 <OutlineColorPicker/>
                 <Label/>
             </LayerBodyHolder>
-        </Fragment>
+        </>
     )
 }
