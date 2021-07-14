@@ -1,6 +1,7 @@
 import React,{Fragment} from "react";
 import {useState,useEffect} from 'react'; 
 import {useSelector} from 'react-redux'
+import data from '../../Map/Selected_Areas.geojsonl.json'
 
 
 export default function Index(){
@@ -11,8 +12,10 @@ export default function Index(){
     let [match,setMatch]=useState([{ "type": "Feature", "properties": { "OBJECTID_1": 0, "OBJECTID": 0, "PAU_NAME": "", "VILLAGE": "", "PAU_CODE": "", "VILL_CODE": "", "ST_NAME": "", "ST_CODE":0, "LOC_NAME": "", "LOC_CODE": "", "AU_NAME": "", "AU_CODE": "", "Elec":0, "Phone":0, "WC":0, "OID_Join": "", "State": "", "County": "", "AU": "", "PAU": "", "M_0_4":0, "F_0_4": 57, "M_5_14": 81, "F_5_14": 96, "M_15_24": 45, "F_15_24": 76, "M_25_44": 37, "F_25_44": 69, "M_45_Plus": 26, "F_45_Plus": 39, "TOT_POP": 577, "Tot_HHS": 119, "Shape_Leng": 3946.73463636, "Shape_Le_1": 3946.73463636, "Shape_Area": 488029.18487400003, "Fam": null, "Census": null, "ES1": null, "ES2": null }, "geometry": { "type": "MultiPolygon", "coordinates": []} }])
 
     useEffect(()=>{ // there is a design problem here , instead of fetch again for the same data, use redux 
-        let fun= async()=>{await fetch('http://localhost:8000/state/paus/').then(res=>{return res.json()}).then(
-            (data)=>{setData({data_list:data})})
+        let fun= async()=>{
+            // await fetch('http://localhost:8000/state/paus/').then(res=>{return res.json()}).then(
+            // (data)=>{setData({data_list:data})})
+            setData(data.features)
     } 
         fun()  // this way of async fetching inside useEffect is described by the docs 
     },[])
@@ -20,13 +23,16 @@ export default function Index(){
     let name=useSelector(state=>state.SearchReducer.Name);
     // filling the data 
     useEffect(()=>{
+        console.log('tabular data:',data_list)
         if(Object.keys(data_list).length!=0 && name!=''){
-            let filtered_match=data_list['data_list']['features'].filter(match=>match.properties.pau_name===name)
+            //let filtered_match=data_list['data_list']['features'].filter(match=>match.properties.pau_name===name)
+            let filtered_match=data_list.filter(match=>match.properties.pau_name===name)
             setMatch(filtered_match)
         }
         else{
     if(Object.keys(data_list).length!=0){
-        let filtered_match =data_list['data_list']['features']
+        //let filtered_match =data_list['data_list']['features']
+        let filtered_match =data_list
         setMatch(filtered_match)
     }
 }
@@ -47,11 +53,11 @@ export default function Index(){
         <tbody>
             {match.map((block,index)=>   
             <tr key={index}>
-                <td style={{fontFamily:'Cairo'}}>{block.properties.au_name}</td>
-                <td style={{fontFamily:'Cairo'}}>{block.properties.pau_name}</td>
-                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{isNaN(parseInt(block.properties.census))?'No Data':parseInt(block.properties.census)}</td>
-                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{isNaN(parseInt(block.properties.es1))?'No Data':parseInt(block.properties.es1)}</td>
-                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{isNaN(parseInt(block.properties.es2))?'No Data':parseInt(block.properties.es2)}</td>
+                <td style={{fontFamily:'Cairo'}}>{block.properties.AU_NAME}</td>
+                <td style={{fontFamily:'Cairo'}}>{block.properties.PAU_NAME}</td>
+                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{isNaN(parseInt(block.properties.Census))?'No Data':parseInt(block.properties.Census)}</td>
+                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{isNaN(parseInt(block.properties.ES1))?'No Data':parseInt(block.properties.ES1)}</td>
+                <td style={{textAlign:'center',fontFamily:'Open Sans',fontSize:'19px'}}>{isNaN(parseInt(block.properties.ES2))?'No Data':parseInt(block.properties.ES2)}</td>
             </tr>)
 
             }
